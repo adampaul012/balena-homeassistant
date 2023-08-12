@@ -8,7 +8,6 @@ services:
     ports:
       - 80:8123
       - 21063:21063
-      - 5353:5353/udp
     privileged: true
     volumes:
       - 'config:/config'
