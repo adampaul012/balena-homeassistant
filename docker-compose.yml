@@ -34,7 +34,7 @@ services:
     container_name: esphome
     image: ghcr.io/esphome/esphome
     volumes:
-      - 'ESPhome:/config'
+      - 'config/ESPhome:/config'
       - '/etc/localtime:/etc/localtime:ro'
     restart: always
     privileged: true
