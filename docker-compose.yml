@@ -35,7 +35,6 @@ services:
     image: ghcr.io/esphome/esphome
     volumes:
       - 'config/ESPhome:/config'
-      - '/etc/localtime:/etc/localtime:ro'
     restart: always
     privileged: true
     network_mode: host
