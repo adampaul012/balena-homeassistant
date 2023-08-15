@@ -34,7 +34,7 @@ services:
     container_name: esphome
     image: ghcr.io/esphome/esphome
     volumes:
-      - 'esphome:/config'
+      - 'config:/config'
     restart: always
     privileged: true
     network_mode: host
