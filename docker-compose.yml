@@ -2,6 +2,7 @@ version: '2'
 volumes:
     config:
     mosquitto:
+    esphome:
 services:
   homeassistant:
     build: homeassistant
@@ -34,7 +35,7 @@ services:
     container_name: esphome
     image: ghcr.io/esphome/esphome
     volumes:
-      - 'config:/config'
+      - 'esphome:/config'
     restart: always
     privileged: true
     network_mode: host
