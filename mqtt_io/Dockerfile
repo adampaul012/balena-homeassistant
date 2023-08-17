@@ -13,16 +13,17 @@ FROM base AS requirements
 
 ARG BUILDX_QEMU_ENV
 RUN apt-get update && \
-    apt-get install -y lsb-release rustc libssl-dev libffi-dev python3-venv && \
+    apt-get install -y apt-utils lsb-release rustc libssl-dev libffi-dev python3-venv && \
     apt-get clean && \
     rm -rf /var/lib/apt-/lists/*
 
 # This nonsense is required for this reason:
 # https://github.com/JonasAlfredsson/docker-nginx-certbot/issues/30
+RUN pip install --upgrade pip
 
 RUN pip install --no-cache-dir wheel setuptools-rust && \
     if [ "${BUILDX_QEMU_ENV}" = "true" -a "$(getconf LONG_BIT)" = "32" ]; then \
-        pip install --no-cache-dir cryptography==3.3.2; \
+        pip install --no-cache-dir cryptography; \
     fi && \
     pip install --no-cache-dir poetry
 
