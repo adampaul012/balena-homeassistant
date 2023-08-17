@@ -2,9 +2,9 @@ FROM python:3.8-alpine
 
 RUN apk update
 
-RUN apk add py3-pip
+RUN apk add py3-pip 
 
-RUN python -m pip install mqtt-io
+RUN python -m pip install--no-cache-dir wheel setuptools-rust mqtt-io
 
 COPY config.yml /config/config.yml
 
