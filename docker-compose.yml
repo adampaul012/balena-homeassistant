@@ -36,4 +36,4 @@ services:
     restart: always
     privileged: true
     volumes:
-      - 'mqttio:/'
+      - 'mqttio:/config'
