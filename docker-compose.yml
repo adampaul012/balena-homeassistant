@@ -2,6 +2,7 @@ version: '2'
 volumes:
     config:
     mosquitto:
+    mqttio:
 services:
   homeassistant:
     build: homeassistant
@@ -30,3 +31,11 @@ services:
       - 'config:/hass-config'
     environment:
       - HC_BASEPATH=/hass-config
+  mqtt-io:
+    image: "flyte/mqtt-gpio:armv7l"
+    ports:
+      - "1883:1883"
+    restart: always
+    privileged: true
+    volumes:
+      - 'mqttio/config.yaml:/config.yaml'
