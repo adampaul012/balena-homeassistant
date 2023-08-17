@@ -38,4 +38,4 @@ services:
     restart: always
     privileged: true
     volumes:
-      - 'mqttio/config.yaml:/config.yaml'
+      - 'mqttio:/'
