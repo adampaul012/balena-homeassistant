@@ -3,7 +3,7 @@ FROM python:3.8-alpine
 
 RUN apk update
 
-RUN apk add py3-pip py3-virtualenv cargo openssl-dev libffi-dev rust pyYAML==5.4.1
+RUN apk add py3-pip py3-virtualenv cargo openssl-dev libffi-dev rust py3-yaml==5.4.1
 
 COPY config.yml /config/config.yml
 
