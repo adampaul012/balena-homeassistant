@@ -32,7 +32,7 @@ services:
     environment:
       - HC_BASEPATH=/hass-config
   mqtt-io:
-    image: "flyte/mqtt-gpio:armv7l"
+    image: "ebekebe/mqtt-gpio:latest"
     ports:
       - "1883:1883"
     restart: always
