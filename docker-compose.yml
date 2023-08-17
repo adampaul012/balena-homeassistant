@@ -2,7 +2,7 @@ version: '2'
 volumes:
     config:
     mosquitto:
-#    mqttio:
+    mqttio:
 services:
   homeassistant:
     build: homeassistant
@@ -31,11 +31,9 @@ services:
       - 'config:/hass-config'
     environment:
       - HC_BASEPATH=/hass-config
-#  mqtt-io:
-#    image: "ebekebe/mqtt-gpio:latest"
-#    ports:
-#      - "1883:1883"
-#    restart: always
-#    privileged: true
-#    volumes:
-#      - 'mqttio:/config'
+  mqtt-io:
+    build: mqtt_io
+    restart: always
+    privileged: true
+    volumes:
+      - 'mqttio:/'
