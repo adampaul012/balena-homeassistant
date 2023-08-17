@@ -39,5 +39,7 @@ RUN venv/bin/pip install -r requirements.txt
 
 COPY --chown=mqtt_io mqtt_io mqtt_io
 
+COPY config.yml /config/config.yml
+
 
 CMD [ "venv/bin/python", "-m", "mqtt_io", "/config/config.yml" ]
