@@ -20,7 +20,7 @@ RUN poetry export -o /requirements.txt && \
     python -m venv /home/mqtt_io/venv && \
     /home/mqtt_io/venv/bin/pip install wheel
 
-RUN addgroup -S appgroup && adduser -S mqtt_io -G mqtt_io
+RUN addgroup -S mqtt_io && adduser -S mqtt_io -G mqtt_io
 USER mqtt_io
 WORKDIR /home/mqtt_io
 
