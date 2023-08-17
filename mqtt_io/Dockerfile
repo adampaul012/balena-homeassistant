@@ -13,7 +13,7 @@ FROM base AS requirements
 
 ARG BUILDX_QEMU_ENV
 RUN apt-get update && \
-    apt-get install -y apt-utils lsb-release rustc libssl-dev libffi-dev python3-venv && \
+    apt-get install -y apt-utils lsb-release rustc>=1.56.0 libssl-dev libffi-dev python3-venv && \
     apt-get clean && \
     rm -rf /var/lib/apt-/lists/*
 
