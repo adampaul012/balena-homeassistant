@@ -3,7 +3,7 @@ FROM python:3.8-alpine
 
 RUN apk update
 
-RUN apk add py3-pip py3-virtualenv cargo openssl-dev libffi-dev rust
+RUN apk add py3-pip py3-virtualenv cargo openssl-dev libffi-dev rust pyYAML==5.4.1
 
 COPY config.yml /config/config.yml
 
@@ -19,8 +19,6 @@ RUN poetry export -o /requirements.txt && \
     mkdir -p /home/mqtt_io && \
     python -m venv /home/mqtt_io/venv && \
     /home/mqtt_io/venv/bin/pip install wheel
-
-FROM base
 
 RUN useradd -m -s /bin/bash mqtt_io
 USER mqtt_io
