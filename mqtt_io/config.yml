@@ -6,8 +6,6 @@ mqtt:
 gpio_modules:
   - name: orangepi
     module: orangepi
-    board: zero
-    mode: board
 
 
 digital_inputs:
