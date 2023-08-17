@@ -1,0 +1,31 @@
+mqtt:
+  host: mqtt
+  port: 1883
+  topic_prefix: home
+
+gpio_modules:
+  - name: orangepi
+    module: orangepi
+    board: zero
+    mode: board
+
+
+digital_inputs:
+  - name: button
+    module: orangepi
+    pin: 21
+    on_payload: "ON"
+    off_payload: "OFF"
+    pullup: no
+    pulldown: no
+
+
+digital_outputs:
+
+  - name: test
+    module: orangepi
+    pin: 3
+    on_payload: "ON"
+    off_payload: "OFF"
+
+#sensor_inputs:

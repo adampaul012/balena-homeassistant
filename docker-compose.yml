@@ -32,7 +32,7 @@ services:
     environment:
       - HC_BASEPATH=/hass-config
   mqtt-io:
-    image: "ebekebe/mqtt-gpio:latest"
+    build: mqtt_io
     restart: always
     privileged: true
     volumes:
