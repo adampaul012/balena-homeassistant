@@ -1,5 +1,7 @@
 FROM python:3.9.13-alpine
 
+RUN apk update
+
 RUN apk add py3-pip
 
 RUN python -m pip install mqtt-io
