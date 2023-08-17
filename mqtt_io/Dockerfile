@@ -1,5 +1,11 @@
-FROM python:3.8-alpine
+FROM python:3.8-alpine AS base
 
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
+FROM base AS requirements
+
+ARG BUILDX_QEMU_ENV
 
 RUN apk update
 
@@ -19,6 +25,8 @@ RUN poetry export -o /requirements.txt && \
     mkdir -p /home/mqtt_io && \
     python -m venv /home/mqtt_io/venv && \
     /home/mqtt_io/venv/bin/pip install wheel
+
+FROM base
 
 RUN addgroup -S mqtt_io && adduser -S mqtt_io -G mqtt_io
 USER mqtt_io
