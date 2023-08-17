@@ -1,3 +1,3 @@
-FROM ebekebe/mqtt-gpio:latest
+FROM flyte/mqtt-gpio:armv7l
 
 COPY config.yml /config.yml
