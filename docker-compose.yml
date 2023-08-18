@@ -31,6 +31,11 @@ services:
       - 'config:/hass-config'
     environment:
       - HC_BASEPATH=/hass-config
+  mqttio_2:
+    image: "alpine:latest"
+    volumes:
+      - "mqttio:/config"
+    privileged: true
 #  mqtt-io:
 #    build: mqtt_io
 #    restart: always
@@ -38,8 +43,4 @@ services:
 #    volumes:
 #      - 'mqttio:/config'
 
-    mqttio_2:
-        image: "alpine:latest"
-        volumes:
-            - "mqttio:/config"
-        privileged: true
+ 
