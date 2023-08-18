@@ -38,7 +38,7 @@ services:
 #    volumes:
 #      - 'mqttio:/config'
 
-    mqttio_2
+    mqttio_2:
         image: "alpine:latest"
         volumes:
             - "mqttio:/config"
