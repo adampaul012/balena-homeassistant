@@ -4,7 +4,7 @@ RUN apk add gcc linux-headers
 
 COPY config.yml /config/config.yml
 
-RUN pip install mqtt_io OPi.GPIO
+RUN pip install PyYAML==6.0.1 mqtt_io OPi.GPIO
 
 RUN rm /usr/local/lib/python3.8/site-packages/mqtt_io/modules/gpio/orangepi.py
 
