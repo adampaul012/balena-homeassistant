@@ -39,7 +39,7 @@ services:
 #      - 'mqttio:/config'
 
     mqttio_2
-        image: alpine:latest
+        image: "alpine:latest"
         volumes:
-            - mqttio:/config
+            - "mqttio:/config"
         privileged: true
