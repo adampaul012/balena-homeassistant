@@ -36,11 +36,11 @@ services:
 #    volumes:
 #      - "mqttio:/config"
 #    privileged: true
-#  mqtt-io_3:
-#    build: mqtt_io_3
-#    restart: always
-#    privileged: true
-#    volumes:
-#      - 'mqttio:/config'
+  mqttio_3:
+    build: mqtt_io_3
+    restart: always
+    privileged: true
+    volumes:
+      - 'mqttio:/config'
 
  
