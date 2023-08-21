@@ -2,28 +2,54 @@ mqtt:
   host: mqtt
   port: 1883
   topic_prefix: home
+  client_id: MQTT_IO
+  ha_discovery:
+    enabled: yes
 
 gpio_modules:
   - name: orangepi
     module: orangepi
-
-
-digital_inputs:
-  - name: button
-    module: orangepi
-    pin: 21
-    on_payload: "ON"
-    off_payload: "OFF"
-    pullup: no
-    pulldown: no
+    mode: board
 
 
 digital_outputs:
-
-  - name: test
+  - name: switch
     module: orangepi
-    pin: 3
+    pin: 26
+    ha_discovery:
+      name: MQTT_IO_switch
+      device_class: switch
     on_payload: "ON"
     off_payload: "OFF"
+    initial: "low"
+    publish_initial: true
+    retain: true
 
-#sensor_inputs:
+
+logging:
+  version: 1
+  handlers:
+    console:
+      class: logging.StreamHandler
+      formatter: default
+      level: DEBUG
+  formatters:
+    default:
+      format: "%(asctime)s %(name)s [%(levelname)-8s] %(message)s"
+      datefmt: "%Y-%m-%d %H:%M:%S"
+  loggers:
+    paho:
+      level: DEBUG
+      handlers:
+        - console
+      propagate: yes
+    mqtt:
+      level: DEBUG
+      handlers:
+        - console
+      propagate: yes
+    mqtt_io:
+      level: DEBUG
+      handlers:
+        - console
+      propagate: yes

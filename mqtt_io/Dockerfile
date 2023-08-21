@@ -1,45 +1,13 @@
-FROM python:3.8-alpine AS base
+FROM python:3.8-alpine
 
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
-
-FROM base AS requirements
-
-ARG BUILDX_QEMU_ENV
-
-RUN apk update
-
-RUN apk add py3-pip py3-virtualenv cargo openssl-dev libffi-dev rust
+RUN apk add gcc linux-headers
 
 COPY config.yml /config/config.yml
 
-RUN pip install --no-cache-dir wheel setuptools-rust && \
-    if [ "${BUILDX_QEMU_ENV}" = "true" -a "$(getconf LONG_BIT)" = "32" ]; then \
-        pip install --no-cache-dir cryptography==3.3.2; \
-    fi && \
-    pip install --no-cache-dir poetry
+RUN pip install PyYAML==6.0.1 mqtt_io OPi.GPIO
 
-COPY pyproject.toml ./
+RUN rm /usr/local/lib/python3.8/site-packages/mqtt_io/modules/gpio/orangepi.py
 
-RUN poetry export -o /requirements.txt && \
-    mkdir -p /home/mqtt_io && \
-    python -m venv /home/mqtt_io/venv && \
-    /home/mqtt_io/venv/bin/pip install wheel
+COPY orangepi.py /usr/local/lib/python3.8/site-packages/mqtt_io/modules/gpio/orangepi.py
 
-FROM base
-
-RUN addgroup -S mqtt_io && adduser -S mqtt_io -G mqtt_io
-USER mqtt_io
-WORKDIR /home/mqtt_io
-
-COPY --from=requirements --chown=mqtt_io /home/mqtt_io/venv ./venv
-COPY --from=requirements /requirements.txt ./
-RUN venv/bin/python -m pip install --upgrade pip
-RUN venv/bin/pip install -r requirements.txt
-
-COPY --chown=mqtt_io mqtt_io mqtt_io
-
-COPY config.yml /config/config.yml
-
-
-CMD [ "venv/bin/python", "-m", "mqtt_io", "/config/config.yml" ]
+CMD [ "python", "-m", "mqtt_io", "/config/config.yml" ]

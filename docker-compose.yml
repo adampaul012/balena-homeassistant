@@ -29,15 +29,11 @@ services:
       - "3218:3218"
     volumes:
       - 'config:/hass-config'
+      - 'mqttio:/mqttio-config'
     environment:
       - HC_BASEPATH=/hass-config
-#  mqttio_2:
-#    image: "python:3.8.10-alpine"
-#    volumes:
-#      - "mqttio:/config"
-#    privileged: true
-  mqttio_3:
-    build: mqtt_io_3
+  mqttio:
+    build: mqtt_io
     restart: always
     privileged: true
     volumes:
