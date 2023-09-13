@@ -1,0 +1,39 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+climate:
+  - platform: awesome_thermostat #generic_thermostat
+    name: Study
+    heater: switch.kitchen_loudness
+    target_sensor: sensor.roztoky_teplota
+    min_temp: 15
+    max_temp: 25
+    ac_mode: false
+    cold_tolerance: 0.3
+    hot_tolerance: 0
+    min_cycle_duration:
+      seconds: 30
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "off"
+    away_temp: 16
+    precision: 0.5
+    eco_temp: 18
+    boost_temp: 22
+    comfort_temp: 21
+    sleep_temp: 20
+
+sensor:
+  - platform: template
+    sensors:
+        roztoky_teplota:
+            friendly_name: "Predpoved Roztoky"
+            unit_of_measurement: '°C'
+            value_template: "{{ state_attr('weather.forecast_roztoky', 'temperature') }}"

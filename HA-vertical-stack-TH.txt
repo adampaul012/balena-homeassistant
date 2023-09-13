@@ -1,0 +1,61 @@
+type: vertical-stack
+cards:
+  - type: custom:thermostat-dark-card
+    entity: climate.test
+    step: '0.5'
+    chevron_size: '50'
+    pending: '3'
+    idle_zone: '2'
+    highlight_tap: false
+    sensor: climate.test
+  - type: horizontal-stack
+    cards:
+      - show_name: false
+        show_icon: true
+        type: button
+        entity: climate.test
+        icon: mdi:weather-night
+        show_state: false
+        tap_action:
+          action: call-service
+          service: climate.set_preset_mode
+          target:
+            entity_id: climate.test
+          data:
+            preset_mode: eco
+      - show_name: false
+        show_icon: true
+        type: button
+        tap_action:
+          action: call-service
+          service: climate.set_preset_mode
+          target:
+            entity_id: climate.test
+          data:
+            preset_mode: comfort
+        entity: climate.test
+        icon: mdi:heat-wave
+      - show_name: false
+        show_icon: true
+        type: button
+        tap_action:
+          action: call-service
+          service: climate.set_preset_mode
+          target:
+            entity_id: climate.test
+          data:
+            preset_mode: boost
+        show_state: false
+        icon: mdi:weather-sunny
+        entity: climate.test
+  - type: custom:button-card
+    entity: switch.mqtt_io_mqtt_io_switch
+    show_name: false
+    show_state: true
+    state:
+      - value: 'off'
+        icon: mdi:radiator-off
+        state_display: Not heating
+      - value: 'on'
+        icon: mdi:radiator
+        state_display: Heating
